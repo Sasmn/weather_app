@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-green: rgb(55, 104, 28);
+    --hatter: rgb(221, 223, 219);
+    --main-red: #ec401e;
+
+    /* MIN + (MAX - MIN) */
+    --nagyon-kicsi: calc(10px + (20 - 10) * ((100vw - 300px) / (1600 - 300)));
+    --kicsi: calc(12px + (25 - 12) * ((100vw - 300px) / (1600 - 300)));
+    --közepes: calc(14px + (37 - 14) * ((100vw - 300px) / (1600 - 300)));
+    --nagy: calc(20px + (60 - 20) * ((100vw - 300px) / (1600 - 300)));
+    --nagyon-nagy: calc(70px + (200 - 70) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.component{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+header{
+    flex: 0 1 20%;
+    text-align: center;
+
+    border: 2px solid black;
+}
+
+aside{
+    flex: 0 1 20%;
+
+    border: 2px solid black;
+}
+
+main{
+    flex: 1 1 100%;
+
+    display: grid;
+
+
+    border: 2px solid black;
+}
+
+
+@media all and (min-width: 600px) {
+    /*tablet*/
+
+}
+
+@media all and (min-width: 768px) {
+    /*számítógép*/
+
+}
