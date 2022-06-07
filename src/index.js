@@ -10,15 +10,30 @@ const domElements = (() => {
         const time = document.createElement('h2');
         const date = document.createElement('h3');
         const temp = document.createElement('h4');
-        
+        const tempFeel = document.createElement('h5');
 
-        container.append(city, time, date, temp)
+        
+        const container2 = document.createElement('ul');
+        const humidity = document.createElement('li');
+        const pressure = document.createElement('li');
+        const wind = document.createElement('li');
+        container2.append(humidity, pressure, wind);
+
+
+        const icon = document.createElement('img');
+
+        container.append(city, time, date, temp, tempFeel, container2, icon)
         return {
             container,
             city,
             time,
             date,
-            temp
+            temp,
+            tempFeel,
+            humidity,
+            pressure,
+            wind,
+            icon
         };
     })();
 
