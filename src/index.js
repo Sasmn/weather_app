@@ -5,10 +5,20 @@ import getWeatherInfo from './functions/getWeatherInfo.js';
 
 const domElements = (() => {
     const header = (() => {
-        const headerTitle = document.createElement('header')
+        const container = document.createElement('header');
+        const city = document.createElement('h1');
+        const time = document.createElement('h2');
+        const date = document.createElement('h3');
+        const temp = document.createElement('h4');
+        
 
+        container.append(city, time, date, temp)
         return {
-            headerTitle
+            container,
+            city,
+            time,
+            date,
+            temp
         };
     })();
 
@@ -33,13 +43,14 @@ const domElements = (() => {
     }
 })();
 
+export default domElements;
 
 function component() {
     const element = document.createElement('div');
     element.classList.add('component')
     
 
-    element.appendChild(domElements.header.headerTitle);
+    element.appendChild(domElements.header.container);
     element.appendChild(domElements.sidebar);
     element.appendChild(domElements.main);
 
@@ -50,6 +61,6 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'London';
+let city = 'New York';
 
-const weatherdata = getWeatherInfo(city);
+getWeatherInfo(city);
