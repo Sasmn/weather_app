@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import './style.css';
 import getWeatherInfo from './functions/getWeatherInfo.js';
+import fullPageScroll from './functions/fullPageScroll';
 
 
 const domElements = (() => {
@@ -79,3 +80,5 @@ document.body.appendChild(component());
 let city = 'New York';
 
 getWeatherInfo(city);
+
+fullPageScroll();
