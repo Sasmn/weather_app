@@ -5,6 +5,9 @@ import fullPageScroll from './functions/fullPageScroll';
 
 
 const domElements = (() => {
+    const panel1 = document.createElement('div');
+    panel1.classList.add('panel');
+
     const header = (() => {
         const container = document.createElement('header');
         const city = document.createElement('h1');
@@ -38,13 +41,6 @@ const domElements = (() => {
         };
     })();
 
-    const main = (() => {
-        const main = document.createElement('main')
-        main.textContent="MAIN"
-
-        return main;
-    })();
-
     const sidebar = (() => {
         const sidebar = document.createElement('aside')
         sidebar.textContent="SIDEBAR"
@@ -52,10 +48,27 @@ const domElements = (() => {
         return sidebar;
     })();
 
+    panel1.append(header.container, sidebar);
+
+
+    const panel2 = document.createElement('div');
+    panel2.classList.add('panel');
+
+    const main = (() => {
+        const main = document.createElement('main')
+        main.textContent="MAIN"
+
+        return main;
+    })();
+
+    panel2.append(main);
+
     return{
+        panel1,
+        panel2,
         header,
-        main,
-        sidebar
+        sidebar,
+        main
     }
 })();
 
@@ -66,9 +79,8 @@ function component() {
     element.classList.add('component')
     
 
-    element.appendChild(domElements.header.container);
-    element.appendChild(domElements.sidebar);
-    element.appendChild(domElements.main);
+    element.appendChild(domElements.panel1);
+    element.appendChild(domElements.panel2);
 
 
     return element;

@@ -1,18 +1,28 @@
 import domElements from "..";
 
-
-
 function fullPageScroll() {
+    /* INITIAL POSITIONS */
+    const panels = document.querySelectorAll('.panel');
+    for (let i = 0; i < panels.length; i++) {
+        const p = panels[i];
+
+        p.style.transform = `translateY(CALC(${(i)}*100vh))`
+        console.log(p.style.transform, p)
+    }
+
+
+    let activePanel = 0;
+
     /* ON PC */
     let scrollDirection = 'down';
 
     var timer = null;
     window.addEventListener('wheel', function (e) {
         if (e.deltaY < 0) {
-            scrollDirection = 'up';
+            scrollDirection = 'down';
         }
         else if (e.deltaY > 0) {
-            scrollDirection = 'down';
+            scrollDirection = 'up';
         }
 
         if (timer !== null) {
@@ -20,56 +30,49 @@ function fullPageScroll() {
         }
 
         timer = setTimeout(function () {
-            if (scrollDirection == 'up') {
-                domElements.main.style.backgroundColor = 'black';
-                scrollToPrevious();
+            if (panels.length - 1 !== activePanel && scrollDirection == 'up') {
+                activePanel++;
             }
-            else {
-                domElements.main.style.backgroundColor = 'white';
-                scrollToNext();
+            else if (activePanel !== 0 && scrollDirection == 'down') {
+                activePanel--;
             }
-        }, 50);
+            scrollPanels(activePanel);
+        }, 250);
     }, false);
-
 
     /* ON TOUCHSCREENS */
     let touchDirection = 'down';
     let touchPosition = 0;
+
     document.addEventListener('touchmove', (e) => {
         if (e.changedTouches[0].clientY > touchPosition) {
-            touchDirection = 'up';
+            touchDirection = 'down';
         }
         else {
-            touchDirection = 'down';
+            touchDirection = 'up';
         }
 
         touchPosition = e.changedTouches[0].clientY;
-        domElements.main.innerHTML = touchDirection;
-
-        e.preventDefault();
     })
+
     document.addEventListener('touchend', (e) => {
-        if (touchDirection == 'up') {
-            domElements.main.style.backgroundColor = 'black';
-            scrollToPrevious();
+        if (panels.length - 1 !== activePanel && touchDirection == 'up') {
+            activePanel++;
         }
-        else {
-            domElements.main.style.backgroundColor = 'white';
-            scrollToNext();
+        else if (activePanel !== 0 && touchDirection == 'down') {
+            activePanel--;
         }
+        scrollPanels(activePanel);
     })
 }
 
-function scrollToNext() {
-    window.scrollTo(0, domElements.main.offsetTop)
+function scrollPanels(activePanel) {
+    const panels = document.querySelectorAll('.panel');
+    for (let i = 0; i < panels.length; i++) {
+        const p = panels[i];
+
+        p.style.transform = `translateY(CALC(${(i - activePanel)}*100vh))`;
+    }
 }
-
-
-function scrollToPrevious() {
-    window.scrollTo(0, domElements.header.container.offsetTop)
-}
-
-
-
 
 export default fullPageScroll;
