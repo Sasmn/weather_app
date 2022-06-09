@@ -26,8 +26,17 @@ export default async function getWeatherInfo(city) {
     domElements.header.icon.src = "http://openweathermap.org/img/w/"+weatherData.weather[0].icon+".png";
 
 
+    const response2 = await fetch(`https://api.unsplash.com/search/photos?client_id=uFwP6I7icJzIyYxxJBobFO0npj18cf42FwraQQ6mCw8&page=1&query=${city}`);
+    const cityImage = await response2.json();
+
+    domElements.header.backgroundImage.src = `${cityImage.results[0].urls.regular}`
+/*
+    const response3 = await fetch(`https://api.unsplash.com/search/photos?client_id=uFwP6I7icJzIyYxxJBobFO0npj18cf42FwraQQ6mCw8&page=1&query=${city}`);
+    const cityImage2 = await response3.json();
+*/
+    domElements.main.backgroundImage.src = `${cityImage.results[1].urls.regular}`
+
     const lat = weatherData.coord.lat;
     const lon = weatherData.coord.lon;
-
     getWeatherForecast(lat, lon);
 }
