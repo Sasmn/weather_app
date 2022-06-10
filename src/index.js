@@ -82,6 +82,10 @@ const domElements = (() => {
     panel4.classList.add('panel');
     panel4.style.backgroundColor = "grey";
 
+    const panel5 = document.createElement('div');
+    panel5.classList.add('panel');
+    panel5.style.backgroundColor = "black";
+
 
     return {
         panel1,
@@ -90,7 +94,8 @@ const domElements = (() => {
         sidebar,
         main,
         panel3,
-        panel4
+        panel4,
+        panel5
     }
 })();
 
@@ -104,7 +109,7 @@ function component() {
     element.appendChild(domElements.panel1);
     element.appendChild(domElements.panel2);
     element.appendChild(domElements.sidebar)
-    element.append(domElements.panel3, domElements.panel4)
+    element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
 
     return element;
