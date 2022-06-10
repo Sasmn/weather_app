@@ -115,6 +115,6 @@ document.body.appendChild(component());
 
 let city = 'London';
 
-getWeatherInfo(city);
+// getWeatherInfo(city);
 
 fullPageScroll();
