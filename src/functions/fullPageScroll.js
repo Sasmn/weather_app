@@ -13,7 +13,7 @@ function fullPageScroll() {
 
     let activePanel = 0;
 
-    /* ON PC */
+    /* ON PC (MOUSE AND TRACKPAD) */
     let scrollDirection = 'down';
 
     let y = 0;
@@ -22,7 +22,8 @@ function fullPageScroll() {
     let y4 = 0;
     let asc = false;
 
-    window.addEventListener('wheel', throttle(damnIt, 300), { passive: false })
+
+    window.addEventListener('wheel', throttle(damnIt, 500), { passive: false })
 
     function damnIt() {
         if (panels.length - 1 !== activePanel && scrollDirection == 'up') {
@@ -32,22 +33,20 @@ function fullPageScroll() {
             activePanel--;
         }
         scrollPanels(activePanel);
-
-        console.log('GEHEN', scrollDirection, event.deltaY)
-
     }
 
     function throttle(cb, timeout) {
-
-
         let lastCall = 0;
         return function (e) {
             e.preventDefault()
 
-            if (Math.abs(event.deltaY) < 10) return;
+            if (Math.abs(e.deltaY) < 10) return;
 
+            if (Math.abs(e.wheelDeltaY) == 120) {
+                y4 = 0;
+            }
 
-            if (e.deltaY - 2*y4 > 0) {
+            if (e.deltaY - 2 * y4 > 0) {
                 asc = true;
             }
             else {
@@ -58,7 +57,6 @@ function fullPageScroll() {
             y3 = y2;
             y2 = y;
             y = e.deltaY;
-            
 
             if (e.deltaY < 0) {
                 scrollDirection = 'down';
@@ -66,7 +64,6 @@ function fullPageScroll() {
             else if (e.deltaY > 0) {
                 scrollDirection = 'up';
             }
-
 
             if (asc == false && scrollDirection == 'up') {
                 return;
