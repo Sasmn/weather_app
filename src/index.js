@@ -10,11 +10,16 @@ const domElements = (() => {
 
     const header = (() => {
         const container = document.createElement('header');
-        const city = document.createElement('h1');
-        const time = document.createElement('h2');
+
+        const div = document.createElement('div');
+        const main = document.createElement('h1');
+        const temp = document.createElement('h2');
+
+        div.append(main, temp)
+
+        const time = document.createElement('h3');
         const date = document.createElement('h3');
-        const temp = document.createElement('h4');
-        const tempFeel = document.createElement('h5');
+        const tempFeel = document.createElement('h3');
 
 
         const container2 = document.createElement('ul');
@@ -23,16 +28,18 @@ const domElements = (() => {
         const wind = document.createElement('li');
         container2.append(humidity, pressure, wind);
 
+        const iconContainer = document.createElement('div');
         const icon = document.createElement('img');
+        iconContainer.appendChild(icon);
 
         const backgroundImage = document.createElement('img');
         backgroundImage.classList.add('bgimg');
 
 
-        container.append(city, time, date, temp, tempFeel, container2, icon, backgroundImage)
+        container.append(div, iconContainer, tempFeel, container2, backgroundImage)
         return {
             container,
-            city,
+            main,
             time,
             date,
             temp,
@@ -40,19 +47,32 @@ const domElements = (() => {
             humidity,
             pressure,
             wind,
+            iconContainer,
             icon,
             backgroundImage
         };
     })();
+    
+    panel1.append(header.container);
 
     const sidebar = (() => {
         const sidebar = document.createElement('aside')
-        sidebar.textContent = "SIDEBAR"
 
-        return sidebar;
+        const city = document.createElement('div');
+        city.classList.add('city')
+
+        const time = document.createElement('div');
+        time.classList.add('time');
+
+
+        sidebar.append(city, time)
+        return {
+            sidebar,
+            city,
+            time
+        };
     })();
 
-    panel1.append(header.container);
 
 
     const panel2 = document.createElement('div');
@@ -108,8 +128,8 @@ function component() {
 
     element.appendChild(domElements.panel1);
     element.appendChild(domElements.panel2);
-    element.appendChild(domElements.sidebar)
-    element.append(domElements.panel3, domElements.panel4, domElements.panel5)
+    element.appendChild(domElements.sidebar.sidebar);
+    // element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
 
     return element;
@@ -118,8 +138,8 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'London';
+let city = 'Bratislava';
 
-// getWeatherInfo(city);
+getWeatherInfo(city);
 
 fullPageScroll();
