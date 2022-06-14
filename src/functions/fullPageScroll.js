@@ -32,6 +32,9 @@ function fullPageScroll() {
             activePanel--;
         }
         scrollPanels(activePanel);
+
+        console.log('GEHEN', scrollDirection, event.deltaY)
+
     }
 
     function throttle(cb, timeout) {
@@ -41,10 +44,10 @@ function fullPageScroll() {
         return function (e) {
             e.preventDefault()
 
-            if (Math.abs(event.deltaY) < 20) return;
+            if (Math.abs(event.deltaY) < 10) return;
 
-            
-            if (e.deltaY - (y + y2 + y3 + y4) / 4 > 0) {
+
+            if (e.deltaY - 2*y4 > 0) {
                 asc = true;
             }
             else {
@@ -55,15 +58,15 @@ function fullPageScroll() {
             y3 = y2;
             y2 = y;
             y = e.deltaY;
-
             
+
             if (e.deltaY < 0) {
                 scrollDirection = 'down';
             }
             else if (e.deltaY > 0) {
                 scrollDirection = 'up';
             }
-            
+
 
             if (asc == false && scrollDirection == 'up') {
                 return;
@@ -85,6 +88,7 @@ function fullPageScroll() {
     let touchPosition = 0;
 
     document.addEventListener('touchmove', (e) => {
+        e.preventDefault();
         if (e.changedTouches[0].clientY > touchPosition) {
             touchDirection = 'down';
         }
@@ -93,7 +97,7 @@ function fullPageScroll() {
         }
 
         touchPosition = e.changedTouches[0].clientY;
-    })
+    }, { passive: false })
 
     document.addEventListener('touchend', (e) => {
         if (panels.length - 1 !== activePanel && touchDirection == 'up') {
