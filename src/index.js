@@ -13,10 +13,13 @@ const domElements = (() => {
 
         const div = document.createElement('div');
         const main = document.createElement('h1');
+        const iconContainer = document.createElement('div');
+        const icon = document.createElement('img');
+        iconContainer.appendChild(icon);
+        
+        div.append(main, iconContainer)
+        
         const temp = document.createElement('h2');
-
-        div.append(main, temp)
-
         const time = document.createElement('h3');
         const date = document.createElement('h3');
         const tempFeel = document.createElement('h3');
@@ -28,15 +31,7 @@ const domElements = (() => {
         const wind = document.createElement('li');
         container2.append(humidity, pressure, wind);
 
-        const iconContainer = document.createElement('div');
-        const icon = document.createElement('img');
-        iconContainer.appendChild(icon);
-
-        const backgroundImage = document.createElement('img');
-        backgroundImage.classList.add('bgimg');
-
-
-        container.append(div, iconContainer, tempFeel, container2, backgroundImage)
+        container.append(div, temp, tempFeel, container2)
         return {
             container,
             main,
@@ -48,8 +43,7 @@ const domElements = (() => {
             pressure,
             wind,
             iconContainer,
-            icon,
-            backgroundImage
+            icon
         };
     })();
     
@@ -80,14 +74,8 @@ const domElements = (() => {
 
     const main = (() => {
         const main = document.createElement('main')
-
-        const backgroundImage = document.createElement('img');
-        backgroundImage.classList.add('bgimg');
-
-        main.append(backgroundImage);
         return {
-            main,
-            backgroundImage
+            main
         };
     })();
 
@@ -137,8 +125,10 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'Linz';
+let city = 'Kiev';
 
-getWeatherInfo(city);
+let ForC = '°C';
+
+getWeatherInfo(city, ForC);
 
 fullPageScroll();

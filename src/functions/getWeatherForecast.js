@@ -1,7 +1,7 @@
 import domElements from "..";
 import { getDayName } from "./getDateNames";
 
-export default async function getWeatherForecast(lat, lon, day) {
+export default async function getWeatherForecast(lat, lon, day, ForC) {
     const response = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=82465ea8349914da9592b8c5629230a6&units=metric`, { mode: 'cors' });
     const forecastData = await response.json();
 
@@ -51,7 +51,7 @@ export default async function getWeatherForecast(lat, lon, day) {
         let d4 = maxFeelsLike;
         let d5 = minTemp;
 
-        buildCard(d1, d2, d3, d4, d5, d6)
+        buildCard(d1, d2, d3, d4, d5, d6, ForC)
 
         maxTemp = 0;
         minTemp = 200;
@@ -59,28 +59,35 @@ export default async function getWeatherForecast(lat, lon, day) {
     }
 }
 
-function buildCard(d1, d2, d3, d4, d5, d6) {
-    const card = document.createElement('div');
-    card.classList.add('card');
-
+function buildCard(d1, d2, d3, d4, d5, d6, ForC) {
+    const container = document.createElement('div')
+    
     const day = document.createElement('h2');
     day.innerHTML = d1;
 
+    const card = document.createElement('div');
+    card.classList.add('card');
+    
     const weather = document.createElement('h3');
     weather.innerHTML = d2;
+    
+    const icon = document.createElement('img');
+    icon.src = "http://openweathermap.org/img/wn/" + d6 + "d@2x.png"
 
     const maxTemp = document.createElement('h4');
-    maxTemp.innerHTML = d3;
+    maxTemp.innerHTML = d3 + " " + ForC;
 
     const maxFeelsLike = document.createElement('h6');
-    maxFeelsLike.innerHTML = "feels like: " + d4;
+    maxFeelsLike.innerHTML = "feels like: " + d4 + " " + ForC;
 
     const minTemp = document.createElement('h5');
-    minTemp.innerHTML = d5;
+    minTemp.innerHTML = d5 + " " + ForC;
 
-    card.style.backgroundImage = "url(http://openweathermap.org/img/wn/" + d6 + "d@2x.png)";
+    // card.style.backgroundImage = "url(http://openweathermap.org/img/wn/" + d6 + "d@2x.png)";
 
-    card.append(day, weather, maxTemp, maxFeelsLike, minTemp)
+    card.append(weather, icon, maxTemp, maxFeelsLike, minTemp)
 
-    domElements.main.main.appendChild(card);
+    container.append(day, card)
+
+    domElements.main.main.appendChild(container);
 }

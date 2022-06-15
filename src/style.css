@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'SF pro', 'Times New Roman', Times, serif;
+    font-weight: 600;
 }
 
 :root {
@@ -20,6 +22,11 @@
     --weatherIcon: ;
 }
 
+@font-face {
+    font-family: SF pro;
+    src: url(fonts/SF-Pro-Display-Light.otf);
+}
+
 .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -31,16 +38,7 @@
 
     position: relative;
     overflow: hidden;
-}
-
-.bgimg {
-    position: absolute;
-    min-width: 110%;
-    min-height: 110%;
-    top: -5%;
-    left: -5%;
-    z-index: -10;
-    /* filter: blur(0.3vh); */
+    background-color: whitesmoke;
 }
 
 .panel {
@@ -50,7 +48,7 @@
     width: 100vw;
     height: 100vh;
 
-    transition: transform ease-in 0.7s;
+    transition: transform 0.6s;
     transition-delay: 0.1s;
     overflow: hidden;
 
@@ -64,51 +62,79 @@
     align-items: center;
 }
 
+.panel > *{
+    transition: 0.8s;
+    transition-delay: 0s;
+    transform: translateX(50%);
+    opacity: 0;
+}
+
 header,
 .card {
-    flex: 0 1 fit-content;
+    flex: 0 1 50%;
     text-align: center;
     height: min-content;
     background-color: var(--bgr);
-    color: var(--font);
-    padding: 5%;
-    border-radius: 2vmin;
+    color: white;
+    /* padding: 5%; */
+    border-radius: 2vmax;
+
+    background: rgb(6, 0, 0);
+    background: linear-gradient(160deg, rgba(27, 26, 26, 0.977) 0%, rgba(34, 34, 27, 0.959) 82%, rgba(42, 43, 40, 0.925) 100%);
+    backdrop-filter: blur(0.3vmax);
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
-    background-repeat: repeat-x;
-    background-position: 50% 150%;
-    background-size: 50%;
 }
 
 header div {
+    flex: 0 1 100%;
     display: flex;
     justify-content: center;
-    gap: 10%;
+    align-items: center;
 }
 
-header h1,
+header h1{
+    font-size: var(--nagy);
+    flex: 0 1 80%;
+    text-align: left;
+    margin-left: 6%;
+}
+
+header div div{
+    flex: 0 1 20%;
+}
+
+header img{
+    width: 80%;
+}
+
 header h2 {
-    font-size: var(--közepes);
+    color: rgb(192, 17, 17);
+    font-size: var(--nagy);
 }
 
 header h3 {
     flex: 1 1 100%;
-    font-size: var(--kicsi);
+    font-size: var(--közepes);
 }
 
 header ul {
-    flex: 0 1 100%;
+    flex: 0 1 fit-content;
     list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: var(--kicsi);
+
+    margin: 2%;
+    padding: 2%;
+    background-color: #807e43;
+    border-radius: 2vmax;
 }
 
 aside {
@@ -117,6 +143,7 @@ aside {
     left: 50vw;
     transform: translateX(-50%);
     width: fit-content;
+    z-index: 10;
 
     display: flex;
     flex-direction: column;
@@ -125,10 +152,18 @@ aside {
     background-color: var(--bgr);
     background-color: rgb(121, 155, 165);
 
+    background: rgb(233, 224, 224);
+    background: linear-gradient(160deg, rgba(233, 224, 224, 0.959) 0%, rgba(232, 232, 217, 0.938) 62%, rgba(253, 255, 251, 0.719) 100%);
+    backdrop-filter: blur(0.1vmax);
+
+    padding: 0.5vmax 1.3vmax;
+    border-radius: 2vmax;
+
     padding: 0.5vh 1vh;
     border-radius: 1.5vmax;
     font-size: var(--nagy);
     color: rgb(186, 223, 229);
+    color: black;
 }
 
 .time {
@@ -145,8 +180,27 @@ main {
     gap: 5%;
 }
 
+main>div {
+    flex: 0 0 45%;
+}
+
+main h2 {
+    background: rgb(233, 224, 224);
+    background: linear-gradient(160deg, rgba(233, 224, 224, 0.959) 0%, rgba(232, 232, 217, 0.938) 62%, rgba(253, 255, 251, 0.911) 100%);
+    backdrop-filter: blur(0.3vmax);
+
+    padding: 0vmax 0.5vmax;
+    border-radius: 1.5vmax;
+    margin-bottom: 4%;
+    margin-left: auto;
+    margin-right: auto;
+    width: min-content;
+
+    font-size: var(--közepes);
+}
+
+
 .card {
-    flex: 0 0 20%;
     padding: 0;
     background-repeat: no-repeat;
     background-position: 0 25%;
@@ -154,32 +208,42 @@ main {
     overflow: hidden;
 
     background: rgb(6, 0, 0);
-    background: linear-gradient(160deg, rgba(6, 0, 0, 1) 0%, rgba(54, 54, 39, 1) 62%, rgba(77, 80, 74, 1) 100%);
+    background: linear-gradient(160deg, rgba(27, 26, 26, 0.977) 0%, rgba(34, 34, 27, 0.959) 82%, rgba(42, 43, 40, 0.925) 100%);
+    backdrop-filter: blur(0.3vmax);
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+}
+
+.card img {
+    flex: 0 0 25%;
+    max-width: 25%;
 }
 
 .card>* {
-    width: 100%;
-    backdrop-filter: blur(0.5vmax);
+    flex: 0 1 100%;
 }
 
-.card h2 {
-    font-size: var(--nagy);
-    background-color: rgb(95, 138, 66);
-    color: rgb(41, 25, 6);
-}
 
 .card h3 {
+    flex: 0 1 75%;
+    text-align: left;
+    text-indent: 5%;
+    overflow: hidden;
     font-size: var(--nagy);
-    color: #073011;
 }
 
 .card h4 {
-    color: red;
+    color: rgb(192, 17, 17);
     font-size: var(--nagy);
 }
 
 .card h5 {
-    color: blue;
+    color: rgb(99, 142, 207);
     font-size: var(--közepes);
 }
 
@@ -195,4 +259,11 @@ main {
 @media all and (min-width: 768px) {
     /*számítógép*/
 
+    header{
+        flex: 0 1 35%;
+    }
+
+    main>div {
+        flex: 0 0 20%;
+    }
 }

@@ -4,12 +4,13 @@ import domElements from "..";
 function fullPageScroll() {
     /* INITIAL POSITIONS */
     const panels = document.querySelectorAll('.panel');
-    for (let i = 0; i < panels.length; i++) {
+    for (let i = 1; i < panels.length; i++) {
         const p = panels[i];
 
-        p.style.transform = `translateY(CALC(${(i)}*100vh))`
+        p.style.transform = `translateY(CALC(${(i)}*150vh)) scale(0.5)`
     }
-
+    panels[0].children[0].style.transform = "translateX(0)";
+    panels[0].children[0].style.opacity = 1;
 
     let activePanel = 0;
 
@@ -116,10 +117,27 @@ function fullPageScroll() {
 
 function scrollPanels(activePanel) {
     const panels = document.querySelectorAll('.panel');
+    panels.forEach(p => {
+        p.children[0].style.transitionDelay = "0s";
+        p.children[0].style.opacity = 0;
+        p.children[0].style.transform = "translateX(50%)"
+    });
+    panels[activePanel].children[0].style.transitionDelay = "0.3s";
+    panels[activePanel].children[0].style.opacity = 1;
+    panels[activePanel].children[0].style.transform = "translateX(0)"
+
+
+    let y = 1;
+
     for (let i = 0; i < panels.length; i++) {
         const p = panels[i];
-
-        p.style.transform = `translateY(CALC(${(i - activePanel)}* 100vh))`;
+        if (activePanel != i) {
+            y = 0.5;
+        }
+        else {
+            y = 1;
+        }
+        p.style.transform = `scale(${y}) translateY(CALC(${(i - activePanel)}* 150vh))`;
     }
 }
 
