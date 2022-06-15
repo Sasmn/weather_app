@@ -16,7 +16,7 @@
     --nagyon-kicsi: calc(10px + (20 - 10) * ((100vw - 300px) / (1600 - 300)));
     --kicsi: calc(12px + (25 - 12) * ((100vw - 300px) / (1600 - 300)));
     --közepes: calc(14px + (45 - 14) * ((100vw - 300px) / (1600 - 300)));
-    --nagy: calc(20px + (60 - 20) * ((100vw - 300px) / (1600 - 300)));
+    --nagy: calc(30px + (60 - 30) * ((100vw - 300px) / (1600 - 300)));
     --nagyon-nagy: calc(70px + (200 - 70) * ((100vw - 300px) / (1600 - 300)));
 
     --weatherIcon: ;
@@ -41,6 +41,73 @@
     background-color: whitesmoke;
 }
 
+.search-container{
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
+
+.search {
+    display: inline-block;
+    margin-right: auto;
+    margin-bottom: auto;
+    position: relative;
+    height: var(--nagy);
+    width: var(--nagy);
+    border: 0.8vmin solid white;
+    border-radius: 5vmax;
+    cursor: text;
+    transition: 0.3s;
+    backdrop-filter: blur(3vh);
+}
+
+.search::after {
+    content: "";
+    position: absolute;
+    top: 83%;
+    right: -8%;
+    width: 0.8vmin;
+    height: 2.5vmin;
+    background-color: white;
+    transform: rotate(-45deg);
+    transition: 0.1s;
+    transition-delay: 0.2s;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.search:hover, .search:active {
+    width: 40vmin;
+}
+
+.search:hover::after, .search:active::after {
+    height: 0;
+    opacity: 0;
+    transition-delay: 0s !important;
+}
+
+input {
+    position: absolute;
+    height: 100%;
+    font-size: var(--kicsi);
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    width: 0;
+    font-family: 'SF pro', 'Times New Roman', Times, serif;
+    color: white;
+}
+
+input:focus{
+    outline: none;    
+}
+
+.search:hover input{
+    width: 90%;
+}
+
 .panel {
     position: absolute;
     top: 0;
@@ -62,7 +129,7 @@
     align-items: center;
 }
 
-.panel > *{
+.panel>* {
     transition: 0.8s;
     transition-delay: 0s;
     transform: translateX(50%);
@@ -97,18 +164,18 @@ header div {
     align-items: center;
 }
 
-header h1{
+header h1 {
     font-size: var(--nagy);
     flex: 0 1 80%;
     text-align: left;
     margin-left: 6%;
 }
 
-header div div{
+header div div {
     flex: 0 1 20%;
 }
 
-header img{
+header img {
     width: 80%;
 }
 
@@ -259,7 +326,7 @@ main h2 {
 @media all and (min-width: 768px) {
     /*számítógép*/
 
-    header{
+    header {
         flex: 0 1 35%;
     }
 

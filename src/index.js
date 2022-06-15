@@ -81,6 +81,7 @@ const domElements = (() => {
 
     panel2.append(main.main);
 
+    /*
     const panel3 = document.createElement('div');
     panel3.classList.add('panel');
     panel3.style.backgroundColor = "beige";
@@ -92,7 +93,23 @@ const domElements = (() => {
     const panel5 = document.createElement('div');
     panel5.classList.add('panel');
     panel5.style.backgroundColor = "black";
+    */
 
+
+    const search = document.createElement('div');
+    search.classList.add('search-container')
+
+    const searchCity = document.createElement('label');
+    searchCity.classList.add('search');
+
+    const searchInput = document.createElement('input');
+    searchInput.inputMode = "text";
+    searchInput.setAttribute('id', "input_field")
+    searchCity.htmlFor = "input_field";
+
+    searchCity.append(searchInput);
+
+    search.appendChild(searchCity);
 
     return {
         panel1,
@@ -100,9 +117,9 @@ const domElements = (() => {
         header,
         sidebar,
         main,
-        panel3,
-        panel4,
-        panel5
+        searchInput,
+        searchCity,
+        search
     }
 })();
 
@@ -116,6 +133,7 @@ function component() {
     element.appendChild(domElements.panel1);
     element.appendChild(domElements.panel2);
     element.appendChild(domElements.sidebar.sidebar);
+    element.appendChild(domElements.search)
     // element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
 
@@ -125,7 +143,7 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'Kiev';
+let city = 'Budapest';
 
 let ForC = '°C';
 
