@@ -23,7 +23,7 @@ function fullPageScroll() {
     let asc = false;
 
 
-    window.addEventListener('wheel', throttle(damnIt, 500), { passive: false })
+    window.addEventListener('wheel', throttle(damnIt, 700), { passive: false })
 
     function damnIt() {
         if (panels.length - 1 !== activePanel && scrollDirection == 'up') {
@@ -69,6 +69,13 @@ function fullPageScroll() {
                 return;
             }
             else if (asc == true && scrollDirection == 'down') {
+                return;
+            }
+
+            if (scrollDirection == 'up' && activePanel == panels.length - 1) {
+                return;
+            }
+            else if (scrollDirection == 'down' && activePanel == 0) {
                 return;
             }
 

@@ -80,7 +80,6 @@ const domElements = (() => {
 
     const main = (() => {
         const main = document.createElement('main')
-        main.textContent = "MAIN"
 
         const backgroundImage = document.createElement('img');
         backgroundImage.classList.add('bgimg');
@@ -138,7 +137,7 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'Honolulu';
+let city = 'Linz';
 
 getWeatherInfo(city);
 

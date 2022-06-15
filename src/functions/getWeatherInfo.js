@@ -1,7 +1,7 @@
 import domElements from "..";
 import {getDayName, getMonthName} from "./getDateNames";
 import getWeatherForecast from "./getWeatherForecast";
-import getLocalTime from "./getLocalTime";
+import getLocalDate from "./getLocalDate";
 
 export default async function getWeatherInfo(city) {
     console.log(city)
@@ -19,9 +19,15 @@ export default async function getWeatherInfo(city) {
 
 
     domElements.sidebar.city.innerHTML = city;
-    const date = getLocalTime(new Date(), weatherData.timezone);
-    domElements.sidebar.time.innerHTML = `${date.getHours()}:${date.getMinutes()}, ${getDayName(date, 'en-US')}, ${date.getDay()} ${getMonthName(date, 'en-US')}`
 
+    let date = undefined
+    function setTime(){
+        date = getLocalDate(new Date(), weatherData.timezone);
+        domElements.sidebar.time.innerHTML = `${date.getHours()}:${date.getMinutes()}, ${getDayName(date, 'en-US')}, ${date.getDay()} ${getMonthName(date, 'en-US')}`
+
+        setTimeout(setTime, 1000);
+    }
+    setTime();
 
     const response2 = await fetch(`https://api.unsplash.com/search/photos?client_id=uFwP6I7icJzIyYxxJBobFO0npj18cf42FwraQQ6mCw8&page=1&query=${city}`);
     const cityImage = await response2.json();
@@ -32,5 +38,6 @@ export default async function getWeatherInfo(city) {
 
     const lat = weatherData.coord.lat;
     const lon = weatherData.coord.lon;
-    getWeatherForecast(lat, lon);
+    const day = date.getDate();
+    getWeatherForecast(lat, lon, day);
 }
