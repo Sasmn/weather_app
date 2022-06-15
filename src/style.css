@@ -6,7 +6,8 @@
 
 :root {
     --main-green: rgb(55, 104, 28);
-    --hatter: rgb(221, 223, 219);
+    --bgr: rgb(118, 143, 94);
+    --font: rgb(187, 214, 161);
     --main-red: #ec401e;
 
     /* MIN + (MAX - MIN) */
@@ -69,7 +70,8 @@ header {
     flex: 0 1 fit-content;
     text-align: center;
     height: min-content;
-    background-color: aliceblue;
+    background-color: var(--bgr);
+    color: var(--font);
     padding: 5%;
     border-radius: 2vmin;
 
@@ -79,8 +81,8 @@ header {
     justify-content: center;
     align-items: center;
 
-    background-repeat: no-repeat;
-    background-position: 145% 0%;
+    background-repeat: repeat-x;
+    background-position: 50% 150%;
     background-size: 50%;
 }
 
@@ -121,10 +123,13 @@ aside {
     flex-direction: column;
     align-items: center;
 
-    background-color: aliceblue;
+    background-color: var(--bgr);
+    background-color: rgb(121, 155, 165);
+
     padding: 0.5vh 1vh;
     border-radius: 1.5vmax;
     font-size: var(--nagy);
+    color: rgb(186, 223, 229);
 }
 
 .time{

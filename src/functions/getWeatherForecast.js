@@ -5,4 +5,13 @@ export default async function getWeatherForecast(lat, lon) {
     const forecastData = await response.json();
 
     console.log(forecastData);
+
+
+    for (let i = 1; i < 6; i++) {
+        
+    }
+}
+
+function buildCard(){
+    
 }

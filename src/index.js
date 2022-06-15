@@ -138,7 +138,7 @@ function component() {
 document.body.appendChild(component());
 
 
-let city = 'Bratislava';
+let city = 'Honolulu';
 
 getWeatherInfo(city);
 
