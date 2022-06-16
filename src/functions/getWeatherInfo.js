@@ -10,7 +10,7 @@ export default async function getWeatherInfo(city) {
     }
 
 
-    let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=82465ea8349914da9592b8c5629230a6&units=metric`, { mode: 'cors' });
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=82465ea8349914da9592b8c5629230a6&units=metric`, { mode: 'cors' });
     /* if the input is not valid for the api, then shake the input field, and exit the function */
     if (!response.ok) {
         domElements.search.style.animation = "shake 0.5s";
@@ -20,7 +20,7 @@ export default async function getWeatherInfo(city) {
 
     /* Set the infos of the current weather card */
     domElements.header.main.innerHTML = weatherData.weather[0].main;
-    domElements.header.icon.src = "http://openweathermap.org/img/wn/" + weatherData.weather[0].icon.substr(0, 2) + "d@2x.png";
+    domElements.header.icon.src = "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon.substr(0, 2) + "d@2x.png";
     domElements.header.temp.innerHTML = weatherData.main.temp;
     domElements.header.tempFeel.innerHTML = "feels like: " + weatherData.main.feels_like;
     domElements.header.humidity.innerHTML = "humidity: " + weatherData.main.humidity + "%";
