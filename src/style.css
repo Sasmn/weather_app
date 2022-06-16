@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'SF pro', 'Times New Roman', Times, serif;
     font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -43,37 +44,37 @@
 
 /* SEARCH FIELD */
 
-.search-container{
+.search-container {
     position: absolute;
     top: 20%;
-    right: 10%;
+    right: 15%;
     display: flex;
 }
 
 /* submit button */
 
-.search-container img{
-    flex: 0 0 50px;
-    max-width: 60px;
+.search-container img {
+    flex: 0 0 35px;
+    max-width: 40px;
     padding-left: 5%;
     opacity: 0;
-    /* z-index: -11; */
     cursor: pointer;
     transition: 0.3s;
     transform: rotate(360deg) translateX(-100%);
 }
 
-.search-container:hover img, .search-container:active img, .search-container:focus-within img {
-    /* right: -10%; */
+.search-container:hover img,
+.search-container:active img,
+.search-container:focus-within img {
     opacity: 1;
     transform: rotate(360deg) translateX(0);
 }
 
-.search-container img:hover{
+.search-container img:hover {
     transform: scale(1.2);
 }
 
-.search-container img:active{
+.search-container img:active {
     transform: scale(1.3);
 }
 
@@ -106,12 +107,16 @@
     pointer-events: none;
 }
 
-.search-container:hover .search, .search-container:active .search, .search:focus-within {
+.search-container:hover .search,
+.search-container:active .search,
+.search:focus-within {
     width: 40vmin;
     flex-basis: 40vmin;
 }
 
-.search-container:hover .search::after, .search-container:active .search::after, .search:focus-within::after {
+.search-container:hover .search::after,
+.search-container:active .search::after,
+.search:focus-within::after {
     height: 0;
     opacity: 0;
     transition-delay: 0s !important;
@@ -131,15 +136,15 @@ input {
     color: white;
 }
 
-input:focus{
-    outline: none;    
+input:focus {
+    outline: none;
 }
 
-.search:hover input, .search:active input, .search:focus-within input{
+.search:hover input,
+.search:active input,
+.search:focus-within input {
     width: 90%;
 }
-
-
 
 
 /* PANELS - FPS */
@@ -171,6 +176,9 @@ input:focus{
     transform: translateX(50%);
     opacity: 0;
 }
+
+
+/* WEATHER TODAY */
 
 header,
 .card {
@@ -240,6 +248,9 @@ header ul {
     border-radius: 2vmax;
 }
 
+
+/* CITY and TIME */
+
 aside {
     position: fixed;
     top: 5vh;
@@ -272,6 +283,9 @@ aside {
 .time {
     font-size: var(--közepes);
 }
+
+
+/* FORECAST */
 
 main {
     flex: 0 0 100%;
@@ -354,6 +368,86 @@ main h2 {
     font-size: var(--kicsi);
 }
 
+
+/* CELSIUS - FAHRENHEIT toggle */
+
+.switch {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+
+    transition: 4s;
+    border-radius: 2vmax;
+    padding: 0 5%;
+
+    position: relative;
+}
+
+.toggle{
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    height: 80%;
+    aspect-ratio: 1/1;
+    background-color: #807e43;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+}
+
+input[type="checkbox"]:checked+.slider .toggle {
+    left: 50%;
+}
+
+/*
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    content: '°F';
+
+}
+*/
 @media all and (min-width: 600px) {
     /*tablet*/
 
@@ -370,34 +464,70 @@ main h2 {
         flex: 0 0 20%;
     }
 
-    .search{
+    .search-container {
+        right: 8%;
+    }
+
+    .search-container img {
+        flex: 0 0 50px;
+        max-width: 60px;
+    }
+
+    .search {
         flex: 0 0 50px;
         height: 50px;
         border-width: 4px;
     }
 
-    .search::after{
+    .search::after {
         top: 35px;
         right: -5px;
         width: 4px;
     }
 }
 
-
-.error{
-    animation: shake 0.5s;
-}
-
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
 }

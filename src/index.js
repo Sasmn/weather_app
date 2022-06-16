@@ -98,6 +98,7 @@ const domElements = (() => {
     */
 
 
+    /* SEARCH FIELD */
     const search = document.createElement('div');
     search.classList.add('search-container')
 
@@ -109,15 +110,31 @@ const domElements = (() => {
     searchInput.setAttribute('id', "input_field")
     searchCity.htmlFor = "input_field";
 
-    const submit = document.createElement('button');
-    submit.type = "submit";
     const submitIcon = document.createElement('img');
     submitIcon.src = icon;
-    submit.appendChild(submitIcon)
 
     searchCity.append(searchInput);
 
     search.append(searchCity, submitIcon);
+
+
+    /* CELSIUS - FAHRENHEIT TOGGLE */
+
+    const label = document.createElement('label');
+    label.classList.add('switch');
+
+    const checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+
+    const span = document.createElement('span')
+    span.classList.add('slider')
+
+    const toggle = document.createElement('div')
+    toggle.innerText = '°C'
+    toggle.classList.add('toggle')
+
+    span.appendChild(toggle);
+    label.append(checkbox, span)
 
     return {
         panel1,
@@ -128,7 +145,10 @@ const domElements = (() => {
         searchInput,
         searchCity,
         search,
-        submitIcon
+        submitIcon,
+        label,
+        checkbox,
+        toggle
     }
 })();
 
@@ -143,6 +163,7 @@ function component() {
     element.appendChild(domElements.panel2);
     element.appendChild(domElements.sidebar.sidebar);
     element.appendChild(domElements.search)
+    element.appendChild(domElements.label)
     // element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
 
@@ -179,4 +200,20 @@ function loadWeather(city) {
     domElements.searchInput.blur();
     getWeatherInfo(city, ForC);
     domElements.searchInput.value = '';
+}
+
+
+domElements.checkbox.addEventListener('click', ()=>{
+    if (domElements.checkbox.checked) {
+        ForC = '°F';
+        domElements.toggle.innerHTML = ForC;
+    }
+    else{
+        ForC = '°C';
+        domElements.toggle.innerHTML = ForC;
+    }
+})
+
+function updateCelFah(){
+    
 }
