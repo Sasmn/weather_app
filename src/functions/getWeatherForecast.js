@@ -81,7 +81,7 @@ function buildCard(d1, d2, d3, d4, d5, d6) {
     weather.innerHTML = d2;
     
     const icon = document.createElement('img');
-    icon.src = "http://openweathermap.org/img/wn/" + d6 + "d@2x.png"
+    icon.src = "https://openweathermap.org/img/wn/" + d6 + "d@2x.png"
 
     const maxTemp = document.createElement('h4');
     maxTemp.innerHTML = d3;
