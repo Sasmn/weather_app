@@ -60,14 +60,14 @@
     opacity: 0;
     cursor: pointer;
     transition: 0.3s;
-    transform: rotate(360deg) translateX(-100%);
+    transform: translateX(-100%);
 }
 
 .search-container:hover img,
 .search-container:active img,
 .search-container:focus-within img {
     opacity: 1;
-    transform: rotate(360deg) translateX(0);
+    transform: translateX(0);
 }
 
 .search-container img:hover {
@@ -89,7 +89,7 @@
     border-radius: 5vmax;
     cursor: text;
     transition: 0.3s;
-    backdrop-filter: blur(30px) grayscale(50%);
+    backdrop-filter: blur(30px) invert(20%);
 }
 
 .search::after {
@@ -110,8 +110,8 @@
 .search-container:hover .search,
 .search-container:active .search,
 .search:focus-within {
-    width: 40vmin;
-    flex-basis: 40vmin;
+    width: 30vmin;
+    flex-basis: 30vmin;
 }
 
 .search-container:hover .search::after,
@@ -125,9 +125,9 @@
 input {
     position: absolute;
     height: 100%;
-    font-size: var(--kicsi);
+    font-size: 2vmax;
     top: 50%;
-    left: 5%;
+    left: 7%;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;
@@ -391,10 +391,12 @@ main h2 {
     cursor: pointer;
     width: 60px;
     height: 34px;
-    background-color: #ccc;
+    background-color: rgba(233, 233, 233, 0.555);
+    box-shadow: 0px 0px 3px rgb(196, 193, 193);
+    border: 0.2px solid white;
+    backdrop-filter: blur(20px);
 
-    transition: 4s;
-    border-radius: 2vmax;
+    border-radius: 5vmax;
     padding: 0 5%;
 
     position: relative;
@@ -406,7 +408,7 @@ main h2 {
     left: 5%;
     height: 80%;
     aspect-ratio: 1/1;
-    background-color: #807e43;
+    background-color: #41e400;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -418,36 +420,6 @@ input[type="checkbox"]:checked+.slider .toggle {
     left: 50%;
 }
 
-/*
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-    border-radius: 50%;
-}
-
-input:checked+.slider {
-    background-color: #2196F3;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-    content: '°F';
-
-}
-*/
 @media all and (min-width: 600px) {
     /*tablet*/
 
@@ -470,7 +442,7 @@ input:checked+.slider:before {
 
     .search-container img {
         flex: 0 0 50px;
-        max-width: 60px;
+        max-width: 50px;
     }
 
     .search {

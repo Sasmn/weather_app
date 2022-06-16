@@ -4,11 +4,15 @@ import getWeatherInfo from './functions/getWeatherInfo.js';
 import fullPageScroll from './functions/fullPageScroll';
 import setViewport from './functions/setViewport';
 import icon from './icons/right-arrow-svgrepo-com.svg'
+import { swapCelFah, addCelFah } from './functions/updateCelFah';
 
 
 const domElements = (() => {
     const panel1 = document.createElement('div');
     panel1.classList.add('panel');
+
+
+    /* FIRST PANEL: CURRENT WEATHER */
 
     const header = (() => {
         const container = document.createElement('header');
@@ -22,9 +26,13 @@ const domElements = (() => {
         div.append(main, iconContainer)
 
         const temp = document.createElement('h2');
+        temp.classList.add('temp');
+
         const time = document.createElement('h3');
         const date = document.createElement('h3');
+
         const tempFeel = document.createElement('h3');
+        tempFeel.classList.add('temp');
 
 
         const container2 = document.createElement('ul');
@@ -51,6 +59,9 @@ const domElements = (() => {
 
     panel1.append(header.container);
 
+
+    /* FIXED CITY AND TIME */
+
     const sidebar = (() => {
         const sidebar = document.createElement('aside')
 
@@ -70,6 +81,7 @@ const domElements = (() => {
     })();
 
 
+    /* SECOND PANEl: 4 DAY FORECAST */
 
     const panel2 = document.createElement('div');
     panel2.classList.add('panel');
@@ -83,19 +95,6 @@ const domElements = (() => {
 
     panel2.append(main.main);
 
-    /*
-    const panel3 = document.createElement('div');
-    panel3.classList.add('panel');
-    panel3.style.backgroundColor = "beige";
-
-    const panel4 = document.createElement('div');
-    panel4.classList.add('panel');
-    panel4.style.backgroundColor = "grey";
-
-    const panel5 = document.createElement('div');
-    panel5.classList.add('panel');
-    panel5.style.backgroundColor = "black";
-    */
 
 
     /* SEARCH FIELD */
@@ -166,54 +165,83 @@ function component() {
     element.appendChild(domElements.label)
     // element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
-
     return element;
 }
 
 document.body.appendChild(component());
 
+/* LOADING OF THE FUNCTIONS */
 setViewport();
-
-let city = 'Sant Petersburg';
-
-let ForC = '°C';
-
-getWeatherInfo(city, ForC);
-
 fullPageScroll();
 
+let city;
+let ForC;
+
+loadStorage();
+console.log(ForC)
+if (city == null) {
+    city = 'Budapest';
+}
+if (ForC == null) {
+    ForC = '°C';
+}
+else if(ForC == "°F"){
+    domElements.checkbox.checked = true;
+    domElements.toggle.innerHTML = ForC;
+}
+
+loadWeather(city);
+
+
+/* SEARCH FILED - city search events */
 domElements.submitIcon.addEventListener('click', () => {
     city = domElements.searchInput.value;
     loadWeather(city);
+    updateStorage();
 })
 
 domElements.search.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         city = domElements.searchInput.value;
         loadWeather(city)
+        updateStorage()
     }
 })
 
+/* loading of weather datas */
 function loadWeather(city) {
     domElements.search.style.animation = "";
 
     domElements.searchInput.blur();
-    getWeatherInfo(city, ForC);
+    getWeatherInfo(city).then(() => {
+        addCelFah(ForC);
+    });
     domElements.searchInput.value = '';
 }
 
-
-domElements.checkbox.addEventListener('click', ()=>{
+/* when switch is toggled, update the metrics */
+domElements.checkbox.addEventListener('click', () => {
     if (domElements.checkbox.checked) {
         ForC = '°F';
         domElements.toggle.innerHTML = ForC;
+        swapCelFah(ForC);
     }
-    else{
+    else {
         ForC = '°C';
         domElements.toggle.innerHTML = ForC;
+        swapCelFah(ForC);
     }
+    updateStorage();
 })
 
-function updateCelFah(){
-    
+
+/* store city and Fahrenheit or Celsius in local storage */
+function loadStorage() {
+    city = localStorage.getItem('city');
+    ForC = localStorage.getItem('ForC');
+}
+
+function updateStorage() {
+    localStorage.setItem('city', city);
+    localStorage.setItem('ForC', ForC);
 }
