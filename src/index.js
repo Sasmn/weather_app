@@ -2,6 +2,8 @@ import _ from 'lodash';
 import './style.css';
 import getWeatherInfo from './functions/getWeatherInfo.js';
 import fullPageScroll from './functions/fullPageScroll';
+import setViewport from './functions/setViewport';
+import icon from './icons/right-arrow-svgrepo-com.svg'
 
 
 const domElements = (() => {
@@ -16,9 +18,9 @@ const domElements = (() => {
         const iconContainer = document.createElement('div');
         const icon = document.createElement('img');
         iconContainer.appendChild(icon);
-        
+
         div.append(main, iconContainer)
-        
+
         const temp = document.createElement('h2');
         const time = document.createElement('h3');
         const date = document.createElement('h3');
@@ -46,7 +48,7 @@ const domElements = (() => {
             icon
         };
     })();
-    
+
     panel1.append(header.container);
 
     const sidebar = (() => {
@@ -103,13 +105,19 @@ const domElements = (() => {
     searchCity.classList.add('search');
 
     const searchInput = document.createElement('input');
-    searchInput.inputMode = "text";
+    searchInput.type = "text";
     searchInput.setAttribute('id', "input_field")
     searchCity.htmlFor = "input_field";
 
+    const submit = document.createElement('button');
+    submit.type = "submit";
+    const submitIcon = document.createElement('img');
+    submitIcon.src = icon;
+    submit.appendChild(submitIcon)
+
     searchCity.append(searchInput);
 
-    search.appendChild(searchCity);
+    search.append(searchCity, submitIcon);
 
     return {
         panel1,
@@ -119,7 +127,8 @@ const domElements = (() => {
         main,
         searchInput,
         searchCity,
-        search
+        search,
+        submitIcon
     }
 })();
 
@@ -142,11 +151,32 @@ function component() {
 
 document.body.appendChild(component());
 
+setViewport();
 
-let city = 'Budapest';
+let city = 'Sant Petersburg';
 
 let ForC = '°C';
 
 getWeatherInfo(city, ForC);
 
 fullPageScroll();
+
+domElements.submitIcon.addEventListener('click', () => {
+    city = domElements.searchInput.value;
+    loadWeather(city);
+})
+
+domElements.search.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        city = domElements.searchInput.value;
+        loadWeather(city)
+    }
+})
+
+function loadWeather(city) {
+    domElements.search.style.animation = "";
+
+    domElements.searchInput.blur();
+    getWeatherInfo(city, ForC);
+    domElements.searchInput.value = '';
+}
