@@ -135,6 +135,11 @@ const domElements = (() => {
     span.appendChild(toggle);
     label.append(checkbox, span)
 
+
+    /* loading screen */
+    const loader = document.createElement('div');
+    loader.classList.add('loader');
+
     return {
         panel1,
         panel2,
@@ -147,7 +152,8 @@ const domElements = (() => {
         submitIcon,
         label,
         checkbox,
-        toggle
+        toggle,
+        loader
     }
 })();
 
@@ -161,8 +167,9 @@ function component() {
     element.appendChild(domElements.panel1);
     element.appendChild(domElements.panel2);
     element.appendChild(domElements.sidebar.sidebar);
-    element.appendChild(domElements.search)
-    element.appendChild(domElements.label)
+    element.appendChild(domElements.search);
+    element.appendChild(domElements.label);
+    element.appendChild(domElements.loader);
     // element.append(domElements.panel3, domElements.panel4, domElements.panel5)
 
     return element;
@@ -185,7 +192,7 @@ if (city == null) {
 if (ForC == null) {
     ForC = '°C';
 }
-else if(ForC == "°F"){
+else if (ForC == "°F") {
     domElements.checkbox.checked = true;
     domElements.toggle.innerHTML = ForC;
 }
@@ -210,13 +217,15 @@ domElements.search.addEventListener('keypress', (e) => {
 
 /* loading of weather datas */
 function loadWeather(city) {
+    domElements.loader.style.display = "block"
     domElements.search.style.animation = "";
-
+    domElements.searchInput.value = '';
     domElements.searchInput.blur();
+
     getWeatherInfo(city).then(() => {
         addCelFah(ForC);
+        domElements.loader.style.display = "none"
     });
-    domElements.searchInput.value = '';
 }
 
 /* when switch is toggled, update the metrics */

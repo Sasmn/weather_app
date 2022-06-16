@@ -420,6 +420,21 @@ input[type="checkbox"]:checked+.slider .toggle {
     left: 50%;
 }
 
+/* LOADER */
+
+.loader{
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 5vmax;
+    height: 5vmax;
+    border: 0.7vmax solid rgba(194, 186, 186, 0.788);
+    border-radius: 50%;
+    border-top: 1vmax solid rgb(46, 49, 53);
+    animation: spin 1s linear infinite;
+}
+
 @media all and (min-width: 600px) {
     /*tablet*/
 
@@ -502,4 +517,9 @@ input[type="checkbox"]:checked+.slider .toggle {
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
     }
+}
+
+@keyframes spin {
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
 }
